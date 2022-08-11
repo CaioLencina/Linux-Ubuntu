@@ -1,0 +1,122 @@
+#!/bin/bash
+#Trabalho
+clear
+echo Digite:
+echo 1- Para alterar permissões utilizando binártios
+echo 2- Para compactar um arquivo utilizando uma extensão em gz ou bz2
+echo 3- Para descompactar um arquivo utilizando uma extensão em gz ou bz2
+echo 4- Para montar um dispositivo vfat ou ntfs
+echo 5- Para desmontar dispositivo vfat ou ntfs
+echo 6- Para atualizar repositorios
+echo 7- Para atualizar sistema
+echo 8- Para instalar pacote um pacote
+echo 9- Para remover um pacote e suas dependências
+read menu
+clear
+
+if [ $menu = 1 ];then
+	echo "Lembrando, os valores dosm binários são: R=4 W=2 X=1"
+	echo "Sabendo disso, digite através dos binários as permissões que deseja"
+	echo "Para o usuário:"
+	read permusu
+	echo "Para o grupo:"
+	read permgrup
+	echo "Para outros:"
+	read permoutros
+	echo "Informe abaixo o arquivo que deseja alterar as permissões"
+	read arqbina
+	chmod $permusu$permgrup$permoutros $arqbina
+
+
+elif [ $menu = 2];then
+	echo "Digite o arquivo que deseja compactar"
+	read arqcompac
+	echo "Digite o nome do arquivo compactado:"
+	read nomcompac
+	echo "Digite a extenção desejada: J = BZ2 ou Z = GZ e adicione VF ao final. Ex: jfv e zvf"
+	read expliq
+	echo "Digite bz2 caso queira j e gz caso queira z"
+	read escolha
+	tar -c$expliq $nomcompac.tar.$escolha $arqcompac
+	sleep 3
+	clear
+
+
+elif [ $menu = 3 ];then
+	echo "Digite o arquivo que deseja descompactar"
+	read descompac
+	echo "Digite a extensão do arquivo, J = BZ2 Z= GZ  adicione VF ao final. Exemplo: jvf ou zvf"
+	read escolh
+	tar -x$escolh $descompac
+	sleep 5
+	clear
+
+elif [ $menu = 4 ];then
+	echo "Digite o caminho do dispositivo que deseja montar"
+	read camin
+	echo "Digite onde deseja montar o dispositivo"
+	read mont
+	echo "Digite a extensão do dispositivo"
+	read extens
+	sudo mount -t $extens $camin $mont
+	sleep 3
+	clear
+
+
+elif [ $menu = 5 ];then
+	echo "Digite o caminho desejado para  desmontar o dispositivo"
+	read desmon
+	sudo unmount $desmont
+	clear
+
+
+elif [ $menu = 6 ];then
+	echo "Atualizando Repositórios..."
+	sleep 3
+	sudo apt-get update
+	sleep 3
+	clear
+
+
+elif [ $menu = 7 ];then
+	echo "Atualizando sistema..."
+	sleep 3
+	sudo apt-get upgrade
+	sleep 3
+	clear
+
+
+elif [ $menu = 8 ];then
+	echo "Digite o nome do pacote que deseja instalar 
+	read instpack
+	sudo apt-get install $instpack
+	sleep 3
+	clear
+
+
+elif [ $menu = 9 ];then
+	echo "Digite o nome do pacote que deseja desinstalar"
+	read desinspackxmoto
+	sudo apt-get autoremove $desinspackxmoto
+	sleep 3
+	clear
+
+
+elif [ $menu = 0 ];then
+	echo "Saindo em 3 segundos..."
+	sleep 1
+	clear
+	echo "Saindo em 2 segundos..."
+	sleep 1
+	clear
+	echo "Saindo em 1 segundo..."
+	sleep 1
+	clear
+	exit 0
+
+else
+	echo Opção inválida
+	sleep 2
+	clear
+
+fi sh trabalho.sh
